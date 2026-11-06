@@ -89,3 +89,45 @@ VALUES
     (3, 'Neighborhood Cleanup',
      'Pick up litter and clear storm drains throughout the neighborhood.',
      'Elm Street and 5th Avenue', '2027-03-27');
+
+-- ===== Categories =====
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+INSERT INTO category (name)
+VALUES
+    ('Environmental'),           -- 1
+    ('Educational'),             -- 2
+    ('Community Service'),       -- 3
+    ('Health and Wellness'),     -- 4
+    ('Construction and Repair'); -- 5
+
+-- ===== Project <-> Category (many-to-many) =====
+-- Junction table: a project can have many categories and a category can have many projects.
+CREATE TABLE project_category (
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    FOREIGN KEY (project_id) REFERENCES project (project_id),
+    FOREIGN KEY (category_id) REFERENCES category (category_id)
+);
+
+INSERT INTO project_category (project_id, category_id)
+VALUES
+    (1, 5), (1, 3),          -- Community Center Roof Repair
+    (2, 5), (2, 4),          -- Playground Rebuild
+    (3, 5), (3, 4),          -- Wheelchair Ramp Installation
+    (4, 5), (4, 3),          -- Habitat Home Framing
+    (5, 5), (5, 1), (5, 2),  -- Solar Panel Workshop
+    (6, 1), (6, 4),          -- Winter Greenhouse Setup
+    (7, 1), (7, 2),          -- School Garden Day
+    (8, 1), (8, 2),          -- Composting Workshop
+    (9, 1),                  -- Fruit Tree Planting
+    (10, 3), (10, 4),        -- Farmers Market Food Rescue
+    (11, 3),                 -- Holiday Food Drive
+    (12, 3), (12, 4),        -- Winter Coat Collection
+    (13, 3), (13, 4),        -- Senior Center Visit
+    (14, 2),                 -- Literacy Tutoring Night
+    (15, 1), (15, 3);        -- Neighborhood Cleanup
