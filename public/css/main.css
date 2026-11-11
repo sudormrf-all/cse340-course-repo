@@ -266,6 +266,33 @@ p {
     margin: 0.35rem 0;
 }
 
+/* Category tags on the project details page */
+.tag-list {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background-color: var(--color-primary); /* white on deep blue: 8.6:1 */
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.tag:hover {
+    background-color: var(--color-primary-dark);
+    color: #ffffff;
+    text-decoration: underline;
+}
+
 /* ---------- Error pages ---------- */
 details {
     margin-top: 1.5rem;
