@@ -1,6 +1,7 @@
 // Import any needed model functions
 import { getUpcomingProjects, getProjectDetails } from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
+import { isValidId } from '../utils/validation.js';
 
 // How many upcoming projects to list on the main projects page
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
@@ -15,8 +16,8 @@ const showProjectsPage = async (req, res) => {
 
 const showProjectDetailsPage = async (req, res, next) => {
     const projectId = req.params.id;
-    // IDs are whole numbers; anything else cannot match a project
-    const project = /^\d+$/.test(projectId) ? await getProjectDetails(projectId) : null;
+    // Only a valid database ID can match a project
+    const project = isValidId(projectId) ? await getProjectDetails(projectId) : null;
 
     // No project with this ID: forward a 404 to the global error handler
     if (!project) {

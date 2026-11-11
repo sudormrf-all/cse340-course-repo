@@ -1,6 +1,7 @@
 // Import any needed model functions
 import { getAllOrganizations, getOrganizationDetails } from '../models/organizations.js';
 import { getProjectsByOrganizationId } from '../models/projects.js';
+import { isValidId } from '../utils/validation.js';
 
 // Define any controller functions
 const showOrganizationsPage = async (req, res) => {
@@ -12,8 +13,8 @@ const showOrganizationsPage = async (req, res) => {
 
 const showOrganizationDetailsPage = async (req, res, next) => {
     const organizationId = req.params.id;
-    // IDs are whole numbers; anything else cannot match an organization
-    const organizationDetails = /^\d+$/.test(organizationId) ? await getOrganizationDetails(organizationId) : null;
+    // Only a valid database ID can match an organization
+    const organizationDetails = isValidId(organizationId) ? await getOrganizationDetails(organizationId) : null;
 
     // No organization with this ID: forward a 404 to the global error handler
     if (!organizationDetails) {

@@ -1,6 +1,7 @@
 // Import any needed model functions
 import { getAllCategories, getCategoryDetails } from '../models/categories.js';
 import { getProjectsByCategoryId } from '../models/projects.js';
+import { isValidId } from '../utils/validation.js';
 
 // Define any controller functions
 const showCategoriesPage = async (req, res) => {
@@ -13,8 +14,8 @@ const showCategoriesPage = async (req, res) => {
 const showCategoryDetailsPage = async (req, res, next) => {
     const categoryId = req.params.id;
 
-    // IDs are whole numbers; anything else cannot match a category
-    const categoryDetails = /^\d+$/.test(categoryId) ? await getCategoryDetails(categoryId) : null;
+    // Only a valid database ID can match a category
+    const categoryDetails = isValidId(categoryId) ? await getCategoryDetails(categoryId) : null;
 
     // No category with this ID: forward a 404 to the global error handler
     if (!categoryDetails) {
