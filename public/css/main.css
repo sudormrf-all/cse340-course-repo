@@ -203,9 +203,10 @@ p {
     font-weight: 400;
 }
 
+.project-list h2,
 .project-list h3 {
     margin: 0 0 0.5rem;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
 }
 
 .project-list p {
@@ -233,6 +234,55 @@ p {
 .org-list strong {
     color: var(--color-text);
     font-size: 1.1rem;
+}
+
+/* ---------- Detail pages (single organization / project) ---------- */
+.detail-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.detail-card h2 {
+    margin-top: 0;
+}
+
+.detail-logo {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+}
+
+.link-list {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.link-list li {
+    margin: 0.35rem 0;
+}
+
+/* ---------- Error pages ---------- */
+details {
+    margin-top: 1.5rem;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+pre {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    overflow-x: auto; /* long stack traces scroll instead of breaking the layout */
+    font-size: 0.9rem;
 }
 
 /* ---------- Footer ---------- */
