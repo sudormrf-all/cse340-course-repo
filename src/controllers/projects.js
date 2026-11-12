@@ -1,5 +1,5 @@
 // Import any needed model functions
-import { getUpcomingProjects, getProjectDetails } from '../models/projects.js';
+import { getAllProjects, getUpcomingProjects, getProjectDetails } from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 import { isValidId } from '../utils/validation.js';
 
@@ -9,9 +9,10 @@ const NUMBER_OF_UPCOMING_PROJECTS = 5;
 // Define any controller functions
 const showProjectsPage = async (req, res) => {
     const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
+    const allProjects = await getAllProjects();
     const title = 'Upcoming Service Projects';
 
-    res.render('projects', { title, projects });
+    res.render('projects', { title, projects, allProjects });
 };
 
 const showProjectDetailsPage = async (req, res, next) => {
