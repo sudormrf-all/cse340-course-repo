@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<main id="main-content">
+    <h1><%= title %></h1>
+    <form class="form-card" action="/edit-category/<%= categoryDetails.category_id %>" method="POST">
+        <div class="form-field">
+            <label for="name">Category Name</label>
+            <input type="text" id="name" name="name" value="<%= categoryDetails.name %>" maxlength="100" required aria-describedby="name-hint">
+            <p class="hint" id="name-hint">3 to 100 characters. Each category needs a different name.</p>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="button">Update Category</button>
+            <a href="/category/<%= categoryDetails.category_id %>">Cancel</a>
+        </div>
+    </form>
+</main>
+<%- include('partials/footer') %>

@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+<main id="main-content">
+    <h1><%= title %></h1>
+    <form class="form-card" action="/edit-organization/<%= organizationDetails.organization_id %>" method="POST">
+        <div class="form-field">
+            <label for="name">Organization Name</label>
+            <input type="text" id="name" name="name" value="<%= organizationDetails.name %>" maxlength="150" required aria-describedby="name-hint">
+            <p class="hint" id="name-hint">3 to 150 characters.</p>
+        </div>
+
+        <div class="form-field">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="5" maxlength="500" required aria-describedby="description-hint"><%= organizationDetails.description %></textarea>
+            <p class="hint" id="description-hint">Up to 500 characters.</p>
+        </div>
+
+        <div class="form-field">
+            <label for="contactEmail">Contact Email</label>
+            <input type="email" id="contactEmail" name="contactEmail" value="<%= organizationDetails.contact_email %>" maxlength="255" required autocomplete="email">
+        </div>
+
+        <div class="form-field">
+            <label for="logoFilename">Logo Filename</label>
+            <input type="text" id="logoFilename" name="logoFilename" value="<%= organizationDetails.logo_filename %>" maxlength="255" required aria-describedby="logoFilename-hint">
+            <p class="hint" id="logoFilename-hint">An image file in the site's images folder, for example placeholder-logo.png.</p>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="button">Update Organization</button>
+            <a href="/organization/<%= organizationDetails.organization_id %>">Cancel</a>
+        </div>
+    </form>
+</main>
+<%- include('partials/footer') %>

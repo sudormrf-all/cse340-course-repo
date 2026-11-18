@@ -10,4 +10,13 @@ const isValidId = (id) => {
     return /^\d+$/.test(id) && Number(id) >= 1 && Number(id) <= MAX_DATABASE_ID;
 };
 
-export { isValidId };
+/**
+ * Builds a 404 error for the global error handler, for records that don't exist.
+ */
+const notFoundError = (message) => {
+    const err = new Error(message);
+    err.status = 404;
+    return err;
+};
+
+export { isValidId, notFoundError };

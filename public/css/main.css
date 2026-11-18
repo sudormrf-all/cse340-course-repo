@@ -299,6 +299,169 @@ p {
     text-decoration: underline;
 }
 
+/* ---------- Flash messages ---------- */
+.flash-messages {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert p {
+    margin: 0.25rem 0;
+}
+
+.alert.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert.warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert.info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+/* ---------- Buttons and action links ---------- */
+.button {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 6px;
+    background-color: var(--color-primary); /* white on deep blue: 8.6:1 */
+    color: #ffffff;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: #ffffff;
+}
+
+.button-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+}
+
+.button-secondary:hover {
+    background-color: var(--color-bg);
+    color: var(--color-primary-dark);
+}
+
+.page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+/* ---------- Forms ---------- */
+.form-card {
+    max-width: 640px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.form-field {
+    margin-bottom: 1.25rem;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-text-muted); /* 6.4:1, so field edges are easy to see */
+    border-radius: 6px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+}
+
+.form-field textarea {
+    resize: vertical;
+}
+
+.hint {
+    margin: 0.35rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+fieldset {
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border: none;
+}
+
+legend {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.checkbox-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.checkbox-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.checkbox-list input {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--color-primary);
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
 /* ---------- Error pages ---------- */
 details {
     margin-top: 1.5rem;

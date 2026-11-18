@@ -19,3 +19,19 @@
             </ul>
         </nav>
     </header>
+    <%
+        // Show any flash messages (reading them also clears them)
+        const messages = typeof locals.flash === 'function' ? locals.flash() : {};
+        const messageTypes = Object.keys(messages).filter(type => messages[type].length > 0);
+    %>
+    <% if (messageTypes.length > 0) { %>
+    <div class="flash-messages">
+        <% messageTypes.forEach(type => { %>
+        <div class="alert <%= type %>" role="<%= type === 'error' ? 'alert' : 'status' %>">
+            <% messages[type].forEach(message => { %>
+            <p><%= message %></p>
+            <% }) %>
+        </div>
+        <% }) %>
+    </div>
+    <% } %>

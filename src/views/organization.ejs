@@ -3,6 +3,7 @@
     <h1><%= title %></h1>
     <section class="detail-card">
         <h2><%= organizationDetails.name %></h2>
+        <p class="page-actions"><a class="button button-secondary" href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a></p>
         <img class="detail-logo" src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
         <p><%= organizationDetails.description %></p>
         <p><strong>Contact:</strong> <a href="mailto:<%= organizationDetails.contact_email %>"><%= organizationDetails.contact_email %></a></p>

@@ -3,6 +3,7 @@
     <h1><%= title %></h1>
     <section class="detail-card">
         <h2><%= categoryDetails.name %></h2>
+        <p class="page-actions"><a class="button button-secondary" href="/edit-category/<%= categoryDetails.category_id %>">Edit Category</a></p>
 
         <h3>Service Projects</h3>
         <% if (projects.length > 0) { %>

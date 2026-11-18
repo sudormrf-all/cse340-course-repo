@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+<main id="main-content">
+    <h1><%= title %></h1>
+    <form class="form-card" action="/new-project" method="POST">
+        <div class="form-field">
+            <label for="title">Project Title</label>
+            <input type="text" id="title" name="title" maxlength="150" required aria-describedby="title-hint">
+            <p class="hint" id="title-hint">3 to 150 characters.</p>
+        </div>
+
+        <div class="form-field">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="5" maxlength="1000" required aria-describedby="description-hint"></textarea>
+            <p class="hint" id="description-hint">Up to 1000 characters.</p>
+        </div>
+
+        <div class="form-field">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" maxlength="255" required>
+        </div>
+
+        <div class="form-field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+
+        <div class="form-field">
+            <label for="organizationId">Organization</label>
+            <select id="organizationId" name="organizationId" required>
+                <option value="">Select an organization</option>
+                <% organizations.forEach(org => { %>
+                <option value="<%= org.organization_id %>"><%= org.name %></option>
+                <% }) %>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="button">Create Project</button>
+            <a href="/projects">Cancel</a>
+        </div>
+    </form>
+</main>
+<%- include('partials/footer') %>
