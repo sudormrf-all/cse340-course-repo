@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<main id="main-content">
+    <h1><%= title %></h1>
+    <p><%= users.length %> <%= users.length === 1 ? 'person has' : 'people have' %> registered an account.</p>
+
+    <% if (users.length > 0) { %>
+    <div class="table-wrapper" role="region" aria-labelledby="users-caption" tabindex="0">
+        <table class="data-table">
+            <caption id="users-caption">All registered users</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email (Username)</th>
+                    <th scope="col">Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(account => { %>
+                <tr>
+                    <td><%= account.name %></td>
+                    <td><%= account.email %></td>
+                    <td><span class="role-badge role-<%= account.role_name %>"><%= account.role_name %></span></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
+
+    <p><a href="/dashboard">&larr; Back to dashboard</a></p>
+</main>
+<%- include('partials/footer') %>

@@ -131,3 +131,40 @@ VALUES
     (13, 3), (13, 4),        -- Senior Center Visit
     (14, 2),                 -- Literacy Tutoring Night
     (15, 1), (15, 3);        -- Neighborhood Cleanup
+
+-- ===== Roles =====
+-- Role-based access control (RBAC): each user has exactly one role.
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) UNIQUE NOT NULL,
+    role_description TEXT
+);
+
+INSERT INTO roles (role_name, role_description)
+VALUES
+    ('user', 'Standard user with basic access'),
+    ('admin', 'Administrator with full system access');
+
+-- ===== Users =====
+-- The email is the username. Passwords are stored only as bcrypt hashes.
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INTEGER NOT NULL REFERENCES roles (role_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ===== Admin testing account =====
+-- Don't INSERT users here: a password has to go through the site to be hashed.
+-- 1. Register name "admin", email admin@example.com, password cse340! at /register
+-- 2. Then run this to give that account the admin role:
+--
+-- UPDATE users
+--    SET role_id = (SELECT role_id FROM roles WHERE role_name = 'admin')
+--  WHERE email = 'admin@example.com';
+--
+-- SELECT u.user_id, u.name, u.email, r.role_name
+--   FROM users u
+--   JOIN roles r ON u.role_id = r.role_id;

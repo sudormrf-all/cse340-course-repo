@@ -14,11 +14,13 @@ const emptyFlashStore = () => Object.fromEntries(FLASH_TYPES.map(type => [type, 
  *   req.flash()                     -> returns (and clears) every message, by type
  */
 const flash = (req, res, next) => {
-    if (!req.session.flash) {
-        req.session.flash = emptyFlashStore();
-    }
-
     req.flash = (type, message) => {
+        // Create the message store if this session doesn't have one yet
+        // (including a brand-new session started at login)
+        if (!req.session.flash) {
+            req.session.flash = emptyFlashStore();
+        }
+
         // Store a new message
         if (type && message) {
             if (!req.session.flash[type]) {

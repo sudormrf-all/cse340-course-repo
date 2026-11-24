@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<main id="main-content">
+    <h1><%= title %></h1>
+    <form class="form-card" action="/login" method="POST">
+        <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" maxlength="100" required autocomplete="username">
+        </div>
+
+        <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="button">Login</button>
+            <span>Need an account? <a href="/register">Register</a></span>
+        </div>
+    </form>
+</main>
+<%- include('partials/footer') %>

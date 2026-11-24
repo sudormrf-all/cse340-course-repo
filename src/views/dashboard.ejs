@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+<main id="main-content">
+    <h1><%= title %></h1>
+    <section class="detail-card">
+        <h2>Your Account</h2>
+        <p><strong>Name:</strong> <%= name %></p>
+        <p><strong>Username:</strong> <%= email %></p>
+        <p><strong>Role:</strong> <span class="role-badge role-<%= roleName %>"><%= roleName %></span></p>
+
+        <% if (user && user.role_name === 'admin') { %>
+        <h3>Admin Tools</h3>
+        <p class="page-actions"><a class="button" href="/users">View All Registered Users</a></p>
+        <% } %>
+    </section>
+</main>
+<%- include('partials/footer') %>
