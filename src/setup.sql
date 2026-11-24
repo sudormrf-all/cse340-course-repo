@@ -143,7 +143,11 @@ CREATE TABLE roles (
 INSERT INTO roles (role_name, role_description)
 VALUES
     ('user', 'Standard user with basic access'),
-    ('admin', 'Administrator with full system access');
+    ('admin', 'Administrator with full system access'),
+    -- Client and employee accounts (requested in the W05 announcement) have the
+    -- same access as a standard user; only 'admin' can use the admin-only pages.
+    ('client', 'Client account with basic access'),
+    ('employee', 'Employee account with basic access');
 
 -- ===== Users =====
 -- The email is the username. Passwords are stored only as bcrypt hashes.
@@ -156,14 +160,25 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ===== Admin testing account =====
+-- ===== Testing accounts (one of each type) =====
 -- Don't INSERT users here: a password has to go through the site to be hashed.
--- 1. Register name "admin", email admin@example.com, password cse340! at /register
--- 2. Then run this to give that account the admin role:
+-- 1. Register each account at /register (all use the password cse340!):
+--      name "admin",    email admin@example.com
+--      name "client",   email client@example.com
+--      name "employee", email employee@example.com
+-- 2. Then run these to give each account its role:
 --
 -- UPDATE users
 --    SET role_id = (SELECT role_id FROM roles WHERE role_name = 'admin')
 --  WHERE email = 'admin@example.com';
+--
+-- UPDATE users
+--    SET role_id = (SELECT role_id FROM roles WHERE role_name = 'client')
+--  WHERE email = 'client@example.com';
+--
+-- UPDATE users
+--    SET role_id = (SELECT role_id FROM roles WHERE role_name = 'employee')
+--  WHERE email = 'employee@example.com';
 --
 -- SELECT u.user_id, u.name, u.email, r.role_name
 --   FROM users u
