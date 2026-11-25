@@ -9,6 +9,7 @@ import {
 } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
+import { isVolunteerForProject } from '../models/volunteers.js';
 import { isValidId, notFoundError } from '../utils/validation.js';
 import { formatDateForInput } from '../utils/dates.js';
 
@@ -70,7 +71,11 @@ const showProjectDetailsPage = async (req, res, next) => {
     const categories = await getCategoriesByProjectId(projectId);
     const title = 'Service Project Details';
 
-    res.render('project', { title, project, categories });
+    // Logged-in users see whether they're volunteering; visitors see no volunteer options
+    const user = req.session.user;
+    const isVolunteer = user ? await isVolunteerForProject(user.user_id, projectId) : false;
+
+    res.render('project', { title, project, categories, isVolunteer });
 };
 
 const showNewProjectForm = async (req, res) => {

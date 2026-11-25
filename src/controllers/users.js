@@ -2,6 +2,7 @@
 import bcrypt from 'bcrypt';
 import { body, validationResult } from 'express-validator';
 import { createUser, emailExists, authenticateUser, getAllUsers } from '../models/users.js';
+import { getProjectsByVolunteerId } from '../models/volunteers.js';
 
 // bcrypt cost factor: each step doubles the work needed to hash (and to guess) a password
 const SALT_ROUNDS = 10;
@@ -173,14 +174,16 @@ const requireRole = (role) => {
     };
 };
 
-const showDashboard = (req, res) => {
+const showDashboard = async (req, res) => {
     const user = req.session.user;
+    const volunteerProjects = await getProjectsByVolunteerId(user.user_id);
 
     res.render('dashboard', {
         title: 'Dashboard',
         name: user.name,
         email: user.email,
-        roleName: user.role_name
+        roleName: user.role_name,
+        volunteerProjects
     });
 };
 

@@ -22,6 +22,23 @@
             <% }) %>
         </ul>
         <% } %>
+
+        <% if (isLoggedIn) { %>
+        <div class="volunteer-panel">
+            <h3>Volunteer</h3>
+            <% if (isVolunteer) { %>
+            <p class="volunteer-status"><span aria-hidden="true">&#10003;</span> You are volunteering for this project.</p>
+            <form action="/remove-volunteer/<%= project.project_id %>" method="POST">
+                <button type="submit" class="button button-secondary">Remove me as a volunteer</button>
+            </form>
+            <% } else { %>
+            <p>Want to help? Sign up, and this project will appear on your dashboard.</p>
+            <form action="/volunteer/<%= project.project_id %>" method="POST">
+                <button type="submit" class="button">Volunteer for this project</button>
+            </form>
+            <% } %>
+        </div>
+        <% } %>
     </section>
     <p><a href="/projects">&larr; Back to upcoming projects</a></p>
 </main>

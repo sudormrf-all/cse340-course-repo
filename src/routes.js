@@ -43,6 +43,7 @@ import {
     showDashboard,
     showUsersPage
 } from './controllers/users.js';
+import { processAddVolunteer, processRemoveVolunteer } from './controllers/volunteers.js';
 import { testErrorPage } from './controllers/errors.js';
 
 const router = express.Router();
@@ -105,6 +106,10 @@ router.get('/dashboard', requireLogin, showDashboard);
 
 // Admin-only page listing every registered user
 router.get('/users', requireRole('admin'), showUsersPage);
+
+// Routes for volunteering: requireLogin runs first so only logged-in users can sign up or leave
+router.post('/volunteer/:projectId', requireLogin, processAddVolunteer);
+router.post('/remove-volunteer/:projectId', requireLogin, processRemoveVolunteer);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

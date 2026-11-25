@@ -160,6 +160,18 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- ===== Project <-> Volunteer (many-to-many) =====
+-- Junction table: a user can volunteer for many projects and a project can have many volunteers.
+-- The primary key stops a user from signing up for the same project twice.
+CREATE TABLE project_volunteer (
+    project_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    signed_up_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (project_id, user_id),
+    FOREIGN KEY (project_id) REFERENCES project (project_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
+
 -- ===== Testing accounts (one of each type) =====
 -- Don't INSERT users here: a password has to go through the site to be hashed.
 -- 1. Register each account at /register (all use the password cse340!):
